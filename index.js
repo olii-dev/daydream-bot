@@ -21,7 +21,7 @@ async function getSubmissionCount() {
     throw new Error(`API error ${resp.status}: ${text}`);
   }
   const data = JSON.parse(text);
-  return data.totalCount || data.length || 0;
+  return data.totalResponses || data.length || 0;
 }
 
 app.command('/daydream-count', async ({ command, ack, say }) => {
