@@ -12,7 +12,7 @@ const app = new App({
 
 async function getSubmissionCount() {
   const fetchFunc = await fetch;  // await the dynamic import promise once here
-  const url = `${FILLOUT_BASE}/v1/api/forms/${FORM_ID}/responses?status=complete&pageSize=1`;
+  const url = `${FILLOUT_BASE}/v1/forms/${FORM_ID}/responses?status=complete&pageSize=1`;
   const resp = await fetchFunc(url, {
     headers: { Authorization: `Bearer ${process.env.FILLOUT_API_KEY}` }
   });
