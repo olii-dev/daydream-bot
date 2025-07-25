@@ -12,7 +12,7 @@ const app = new App({
 
 async function getSubmissionCount() {
   const fetchFunc = await fetch;
-  const url = `${FILLOUT_BASE}/v1/api/forms/${FORM_ID}/submissions?status=complete&pageSize=1`;
+  const url = `${FILLOUT_BASE}/v1/api/forms/${FORM_ID}/submissions?status=finished&pageSize=1`;
   const resp = await fetchFunc(url, {
     headers: { Authorization: `Bearer ${process.env.FILLOUT_API_KEY}` }
   });
