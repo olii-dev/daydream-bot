@@ -11,13 +11,16 @@ const app = new App({
 });
 
 async function getSubmissionCount() {
-  const fetchFunc = await fetch;  // await the dynamic import promise once here
-  const url = `${FILLOUT_BASE}/v1/forms/${FORM_ID}/responses?status=complete&pageSize=1`;
+  const fetchFunc = await fetch;
+  const url = `${FILLOUT_BASE}/v1/api/forms/${FORM_ID}/submissions?status=complete&pageSize=1`;
   const resp = await fetchFunc(url, {
     headers: { Authorization: `Bearer ${process.env.FILLOUT_API_KEY}` }
   });
-  if (!resp.ok) throw new Error(`API error ${resp.status}`);
-  const data = await resp.json();
+  const text = await resp.text();
+  if (!resp.ok) {
+    throw new Error(`API error ${resp.status}: ${text}`);
+  }
+  const data = JSON.parse(text);
   return data.totalCount || data.length || 0;
 }
 
