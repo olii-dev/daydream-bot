@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { App } = require('@slack/bolt');
-const fetch = require('node-fetch');
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const FILLOUT_BASE = 'https://api.fillout.com';
 const FORM_ID = 'eNMLgBqrykus';
@@ -11,8 +11,9 @@ const app = new App({
 });
 
 async function getSubmissionCount() {
+  const fetchFunc = await fetch;  // await the dynamic import promise once here
   const url = `${FILLOUT_BASE}/v1/api/forms/${FORM_ID}/responses?status=complete&pageSize=1`;
-  const resp = await fetch(url, {
+  const resp = await fetchFunc(url, {
     headers: { Authorization: `Bearer ${process.env.FILLOUT_API_KEY}` }
   });
   if (!resp.ok) throw new Error(`API error ${resp.status}`);
