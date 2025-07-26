@@ -60,6 +60,11 @@ app.command('/daydream-count', async ({ command, ack, say }) => {
   }
 });
 
+app.command('/responses', async ({ command, ack, say }) => {
+  await ack();
+  await say(`Daydream responses here: https://app.fillout.com/forms/${FORM_ID}/responses`);
+});
+
 (async () => {
   await app.start(process.env.PORT || 3000);
   console.log('⚡️ Bolt app is running!');
