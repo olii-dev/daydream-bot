@@ -31,23 +31,27 @@ app.command('/daydream-count', async ({ command, ack, say }) => {
     
     // Fun random responses
     const responses = [
-      `🎉 Woohoo! There are currently *${count}* dreamers who've shared their visions!`,
-      `✨ Amazing! *${count}* people have submitted their wildest daydreams so far!`,
-      `🌟 Incredible! We've collected *${count}* fantastic daydream submissions!`,
-      `🚀 Blast off! *${count}* submissions have landed in our daydream database!`,
-      `💫 Mind-blowing! *${count}* creative souls have shared their daydreams with us!`,
-      `🎪 Step right up! We've got *${count}* spectacular daydream submissions!`,
-      `🌈 Rainbow power! *${count}* colorful daydreams have been submitted!`,
-      `⚡ Electric! *${count}* high-voltage daydream submissions are in the books!`
+      `🎉 Woohoo! There are currently *${count}* dreamers who've filled out our form!`,
+      `✨ Amazing! *${count}* people have submitted their wildest daydreams through the form!`,
+      `🌟 Incredible! We've collected *${count}* fantastic form submissions!`,
+      `🚀 Blast off! *${count}* form submissions have landed in our daydream database!`,
+      `💫 Mind-blowing! *${count}* creative souls have completed our daydream form!`,
+      `🎪 Step right up! We've got *${count}* spectacular form responses!`,
+      `🌈 Rainbow power! *${count}* colorful daydreams have been submitted via our form!`,
+      `⚡ Electric! *${count}* high-voltage form submissions are in the books!`
     ];
     
     const randomResponse = responses[Math.floor(Math.random() * responses.length)];
     
     // Add extra flair for milestone numbers
-    if (count % 100 === 0 && count > 0) {
-      await say(`🎊 MILESTONE ALERT! 🎊\n${randomResponse}\nThat's a HUGE round number! Time to celebrate! 🥳`);
-    } else if (count % 50 === 0 && count > 0) {
-      await say(`🎈 HALFWAY TO THE NEXT HUNDRED! 🎈\n${randomResponse}`);
+    if (count === 20) {
+      await say(`🎊 TWENTY SUBMISSIONS! 🎊\n${randomResponse}\nWe're really gaining momentum now! 🚀`);
+    } else if (count === 15) {
+      await say(`� FIFTEEN AND COUNTING! �\n${randomResponse}\nThe daydreams keep flowing! ✨`);
+    } else if (count === 10) {
+      await say(`🎉 DOUBLE DIGITS! 🎉\n${randomResponse}\nWe've hit the big 1-0! 🥳`);
+    } else if (count === 5) {
+      await say(`FIRST FIVE SUBMISSIONS!\n${randomResponse}\nWhat a great start! 🎯`);
     } else {
       await say(randomResponse);
     }
