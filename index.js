@@ -62,7 +62,12 @@ app.command('/daydream-count', async ({ command, ack, say }) => {
 
 app.command('/responses', async ({ command, ack, say }) => {
   await ack();
-  await say(`Daydream responses here: https://app.fillout.com/forms/${FORM_ID}/responses`);
+  try {
+    await say(`📋 Daydream responses here: https://app.fillout.com/forms/${FORM_ID}/responses`);
+  } catch (err) {
+    console.error('Error in /responses command:', err);
+    await say(`⚠️ Oops! Something went wrong getting the responses link.`);
+  }
 });
 
 (async () => {
