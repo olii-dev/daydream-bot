@@ -80,6 +80,33 @@ app.command('/github', async ({ command, ack, say }) => {
   }
 });
 
+app.command('/days-until', async ({ command, ack, say }) => {
+  await ack();
+  try {
+    const today = new Date();
+    const targetDate = new Date(today.getFullYear(), 8, 27); // September is month 8 (0-indexed)
+    
+    // If we've already passed Sept 27 this year, count to next year
+    if (today > targetDate) {
+      targetDate.setFullYear(today.getFullYear() + 1);
+    }
+    
+    const timeDiff = targetDate.getTime() - today.getTime();
+    const daysUntil = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    
+    if (daysUntil === 0) {
+      await say(`🎉 IT'S SEPTEMBER 27TH TODAY! The day is finally here! 🎊`);
+    } else if (daysUntil === 1) {
+      await say(`⏰ Just *1 day* until September 27th! Tomorrow's the big day! 🚀`);
+    } else {
+      await say(`📅 There are *${daysUntil} days* until September 27th! ⏳✨`);
+    }
+  } catch (err) {
+    console.error('Error in /days-until command:', err);
+    await say(`⚠️ Oops! Something went wrong calculating the countdown.`);
+  }
+});
+
 (async () => {
   await app.start(process.env.PORT || 3000);
   console.log('⚡️ Bolt app is running!');
