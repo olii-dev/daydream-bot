@@ -47,7 +47,7 @@ app.command('/daydream-count', async ({ command, ack, say }) => {
     if (count === 20) {
       await say(`🎊 TWENTY SUBMISSIONS! 🎊\n${randomResponse}\nWe're really gaining momentum now! 🚀`);
     } else if (count === 15) {
-      await say(`� FIFTEEN AND COUNTING! �\n${randomResponse}\nThe daydreams keep flowing! ✨`);
+      await say(` FIFTEEN AND COUNTING!  \n${randomResponse}\nThe daydreams keep flowing! ✨`);
     } else if (count === 10) {
       await say(`🎉 DOUBLE DIGITS! 🎉\n${randomResponse}\nWe've hit the big 1-0! 🥳`);
     } else if (count === 5) {
@@ -63,10 +63,20 @@ app.command('/daydream-count', async ({ command, ack, say }) => {
 app.command('/responses', async ({ command, ack, say }) => {
   await ack();
   try {
-    await say(`📋 Daydream responses here: https://app.fillout.com/editor/${FORM_ID}/results`);
+    await say(`Daydream responses here: https://app.fillout.com/editor/${FORM_ID}/results`);
   } catch (err) {
     console.error('Error in /responses command:', err);
     await say(`⚠️ Oops! Something went wrong getting the responses link.`);
+  }
+});
+
+app.command('/github', async ({ command, ack, say }) => {
+  await ack();
+  try {
+    await say(`Daydream Adelaide GitHub: https://github.com/olii-dev/daydream-adelaide`);
+  } catch (err) {
+    console.error('Error in /github command:', err);
+    await say(`⚠️ Oops! Something went wrong getting the GitHub link.`);
   }
 });
 
